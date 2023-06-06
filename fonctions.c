@@ -47,8 +47,7 @@ char* create_password() {
 
 
     do{
-        printf("Entrez votre mot de passe :\n");
-        printf("Votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre");
+        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre): \n");
         fgets(password, sizeof(password), stdin);
         password_len = strlen(password);
         for (int i = 0;i<password_len;i++) {
@@ -67,6 +66,7 @@ char* create_password() {
 
 
     }while(special_count==0 ||number_count == 0 || uppercase_count == 0);
+    save_password((password));
     return password;
 }
 
@@ -80,9 +80,41 @@ void save_password(char* password){
     fputs(password,fptr);
     fclose(fptr);
 
-    printf("Mot de passe enregistré !");
+    printf("Mot de passe enregistr !");
 }
 
-void password_verif(){
-d
+int password_verif(char* password){
+    char * verif = create_password();
+    if (strcmp(password, verif) != 0){
+        printf("Mot de passe éronné");
+        return 0;
+    }
+    else {
+        //Créer une fonction qui fait rentrer dans le journal;
+    }
+
+}
+
+
+void addrecord()
+{
+    //initialise un tableau de char qui va nous servir de texte
+    char phrase[1000];
+
+    //ouverture du fichier + ecriture
+    FILE* fichier = fopen("record.txt", "a");
+
+    //saisie du texte qu'on veut ajouter
+    printf("Veuillez saisir une phrase : ");
+    fgets(phrase, sizeof(phrase), stdin);
+
+    //ajout de la date
+
+
+
+    //ajout du texte dans le fichier
+    fprintf(fichier, "%s", phrase);
+
+    //fermeture du fichier
+    fclose(fichier);
 }

@@ -24,7 +24,8 @@ void ajout(AGENDA *);
 int len_password();
 char* create_password();
 void save_password(char* password);
-void password_verif();ds
+int password_verif(char* password);
+void addrecord();
 
 
 #endif //C_SHELL_FONCTIONS_H
