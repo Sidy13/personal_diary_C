@@ -6,6 +6,6 @@
 
 int main() {
     char* password = create_password();
+    addrecord();
     return 0;
-
 }

@@ -94,30 +94,7 @@ int password_verif(char* password){
 }
 
 
-/*void stop_password(char * password){
-    for (int i = 0; i<3; i++){
-        password_verif(password);
-        if (password_verif(password) == 0){
-            // Si la fonction est égale à 0 3 fois alors le programme se bloque
-    }
-        else{
-            enter_diary();
-        }
-    }
-}
 
-void stop_password(char * password){
-    int count = 1;
-    do {
-        password_verif(password);
-        if (password_verif(password) == 0){
-            count++;
-        }
-        else{
-            enter_diary();
-        }
-    }while (count !=3);
-}*/
 
 void stop_password(char* password) {
     int count = 0; // Initialisez count à 0
@@ -146,7 +123,7 @@ void addrecord()
     char phrase[1000];
 
     //ouverture du fichier + ecriture
-    FILE* fichier = fopen("record.txt", "a");
+    FILE* fichier = fopen("../data/record.txt", "a");
 
     //saisie du texte qu'on veut ajouter
     printf("Veuillez saisir une phrase : ");
