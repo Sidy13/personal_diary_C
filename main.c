@@ -9,21 +9,11 @@ int main() {
     char data[1000];
 
 
-    printf("%s", pass);
     FILE*  fptr;
-    fptr = fopen("file1.txt","w");
-
-    if(fptr == NULL){
-        printf("Unable to create file\n");
-        return 1;
-    }
-    printf("Enter contents to store in file : \n");
-    fgets(data,1000,stdin);
-
-    fputs(data,fptr);
+    fptr = fopen("../data/file2.txt","w");
+    fputs("popo",fptr);
     fclose(fptr);
 
-    printf("file created and saved succesfully");
 
     return 0;
 
