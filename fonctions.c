@@ -39,53 +39,50 @@ int len_password() {
 
 
 char* create_password() {
-    char *password = (char *) malloc(sizeof(char)*40);
+    char *password = (char *) malloc(sizeof(char) * 40);
     int special_count = 0;
     int number_count = 0;
     int uppercase_count = 0;
     int password_len = 0;
 
-
-    do{
+    do {
         printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre): \n");
-        fgets(password, sizeof(password), stdin);
+        fgets(password, 40, stdin);
         password_len = strlen(password);
-        for (int i = 0;i<password_len;i++) {
-            if (password[i] > 47 && password[i] < 58) {
+
+        for (int i = 0; i < password_len; i++) {
+            if (password[i] >= '0' && password[i] <= '9') {
                 number_count++;
-            } else {
-                if (!((password[i] > 64 && password[i] < 91) || (password[i] > 96 && password[i] < 123))) {
-                    special_count++;
-                } else if (password[i] > 64 && password[i] < 91) {
-                    uppercase_count++;
-                }
+            } else if ((password[i] >= '!' && password[i] <= '/') || (password[i] >= ':' && password[i] <= '@') || (password[i] >= '[' && password[i] <= '`') || (password[i] >= '{' && password[i] <= '~')) {
+                special_count++;
+            } else if (password[i] >= 'A' && password[i] <= 'Z') {
+                uppercase_count++;
             }
             printf("%c", password[i]);
         }
+    } while (special_count == 0 || number_count == 0 || uppercase_count == 0);
 
-
-
-    }while(special_count==0 ||number_count == 0 || uppercase_count == 0);
-    save_password((password));
+    save_password(password);
     return password;
 }
 
-void save_password(char* password){
+void save_password(char* password) {
     FILE*  fptr;
-    fptr = fopen("../data/password.txt","w");
+    fptr = fopen("../data/password.txt", "w");
 
-    if(fptr == NULL){
+    if (fptr == NULL) {
         printf("Impossible d'enregistrer le mot de passe\n");
+    } else {
+        fputs(password, fptr);
+        fclose(fptr);
+        printf("Mot de passe enregistré !\n");
     }
-    fputs(password,fptr);
-    fclose(fptr);
-
-    printf("Mot de passe enregistr !");
 }
+
 
 int password_verif(char* password){
     char verif[100];
-    printf("Entrez votre mot de passe :");
+    printf("\nEntrez votre mot de passe :");
     scanf("%s", verif);
     if (strcmp(password, verif) != 0){
         printf("Mot de passe erroné");

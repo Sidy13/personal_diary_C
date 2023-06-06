@@ -6,7 +6,6 @@
 
 int main() {
     char* password = create_password();
-    save_password(password);
     return 0;
 
 }
