@@ -85,6 +85,7 @@ void addrecord()
     //ajout de la date
 
 
+
     //ajout du texte dans le fichier
     fprintf(fichier, "%s", phrase);
 
