@@ -5,16 +5,8 @@
 #include "fonctions.h"
 
 int main() {
-    //char* pass = password();
-    char data[1000];
-
-
-    FILE*  fptr;
-    fptr = fopen("../data/file2.txt","w");
-    fputs("popo",fptr);
-    fclose(fptr);
-
-
+    char* password = create_password();
+    save_password(password);
     return 0;
 
 }

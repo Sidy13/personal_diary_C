@@ -38,7 +38,7 @@ int len_password() {
 }
 
 
-char* password() {
+char* create_password() {
     char *password = (char *) malloc(sizeof(char)*40);
     int special_count = 0;
     int number_count = 0;
@@ -69,24 +69,20 @@ char* password() {
     }while(special_count==0 ||number_count == 0 || uppercase_count == 0);
     return password;
 }
-//
-//int create_password() {
-//    int password;
-//    int verification = 1;
-//    int length = len_password();
-//    printf("Entrez votre mot de passe :\n");
-//    scanf("%d", password);
-//    for (int i = 0; i < length; i++) {
-//        while (verification==1)
-//            if ((password[i]<0)||(password[i]>9)){
-//                printf("Votre mot de passe ne doit contenir que des chiffres\n");
-//                printf("Entrez votre mot de passe :\n");
-//                scanf("%d", password);
-//            }
-//            else
-//                verification = 0;
-//    }
-//    return password;
-//}
 
-//Test Alex
+void save_password(char* password){
+    FILE*  fptr;
+    fptr = fopen("../data/password.txt","w");
+
+    if(fptr == NULL){
+        printf("Impossible d'enregistrer le mot de passe\n");
+    }
+    fputs(password,fptr);
+    fclose(fptr);
+
+    printf("Mot de passe enregistré !");
+}
+
+void password_verif(){
+
+}
