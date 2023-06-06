@@ -92,7 +92,6 @@ int password_verif(char* password){
     else {
         //Créer une fonction qui fait rentrer dans le journal;
     }
-
 }
 
 
