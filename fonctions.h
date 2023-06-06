@@ -25,6 +25,8 @@ int len_password();
 char* create_password();
 void save_password(char* password);
 int password_verif(char* password);
+void stop_password(char * password);
+void enter_diary();
 void addrecord();
 
 

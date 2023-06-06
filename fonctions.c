@@ -84,18 +84,65 @@ void save_password(char* password){
 }
 
 int password_verif(char* password){
-    char * verif = create_password();
+    char verif[100];
+    printf("Entrez votre mot de passe :");
+    scanf("%s", verif);
     if (strcmp(password, verif) != 0){
-        printf("Mot de passe éronné");
+        printf("Mot de passe erroné");
         return 0;
     }
     else {
-        //Créer une fonction qui fait rentrer dans le journal;
+        return 1;
     }
 }
 
 
+/*void stop_password(char * password){
+    for (int i = 0; i<3; i++){
+        password_verif(password);
+        if (password_verif(password) == 0){
+            // Si la fonction est égale à 0 3 fois alors le programme se bloque
+    }
+        else{
+            enter_diary();
+        }
+    }
+}
 
+void stop_password(char * password){
+    int count = 1;
+    do {
+        password_verif(password);
+        if (password_verif(password) == 0){
+            count++;
+        }
+        else{
+            enter_diary();
+        }
+    }while (count !=3);
+}*/
+
+void stop_password(char* password) {
+    int count = 0; // Initialisez count à 0
+
+    do {
+        if (password_verif(password) == 0) {
+            count++;
+        } else {
+            enter_diary();
+        }
+
+        if (count == 3) {
+            return; // Arrêtez la fonction après trois mots de passe erronés
+        }
+
+    } while (1); // Utilisez 1 comme condition pour une boucle infinie
+}
+
+
+void enter_diary(){
+
+}
 void addrecord()
 {
     //initialise un tableau de char qui va nous servir de texte
