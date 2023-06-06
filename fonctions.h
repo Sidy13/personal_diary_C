@@ -22,6 +22,7 @@ typedef struct {
 
 void ajout(AGENDA *);
 int len_password();
+int special_character(char c);
 char* create_password();
 void save_password(char* password);
 int password_verif(char* password);

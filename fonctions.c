@@ -38,7 +38,7 @@ int len_password() {
 }
 
 
-char* create_password() {
+/*char* create_password() {
     char *password = (char *) malloc(sizeof(char) * 40);
     int special_count = 0;
     int number_count = 0;
@@ -58,13 +58,65 @@ char* create_password() {
             } else if (password[i] >= 'A' && password[i] <= 'Z') {
                 uppercase_count++;
             }
+            else if (password[i] >= 'a' && password[i] <= 'z') {
+                uppercase_count++;
+            }
             printf("%c", password[i]);
         }
     } while (special_count == 0 || number_count == 0 || uppercase_count == 0);
 
     save_password(password);
     return password;
+}*/
+
+
+int special_character(char c) {
+    char special_characters[] = "!@#$%^&*()_+-={}[]|\\:;\"'<>,.?/";
+
+    for (int i = 0; i < strlen(special_characters); i++) {
+        if (c == special_characters[i]) {
+            return 1;
+        }
+    }
+
+    return 0;
 }
+
+char* create_password() {
+    char* password = (char*) malloc(sizeof(char) * 40);
+    int uppercase_count = 0;
+    int lowercase_count = 0;
+    int special_count = 0;
+    int digit_count = 0;
+
+    do {
+        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins une majuscule, une minuscule, un caractere special et un chiffre): \n");
+        fgets(password, 40, stdin);
+
+        for (int i = 0; password[i] != '\0'; i++) {
+            if (password[i] >= 'A' && password[i] <= 'Z')
+                uppercase_count++;
+            else if (password[i] >= 'a' && password[i] <= 'z')
+                lowercase_count++;
+            else if (password[i] >= '0' && password[i] <= '9')
+                digit_count++;
+            else if (special_character(password[i]))
+                special_count++;
+        }
+
+        if (!(uppercase_count >= 1 && lowercase_count >= 1 && special_count >= 1 && digit_count >= 1)) {
+            printf("Le mot de passe ne satisfait pas les conditions. Veuillez réessayer.\n");
+            uppercase_count = 0;
+            lowercase_count = 0;
+            special_count = 0;
+            digit_count = 0;
+        }
+    } while (!(uppercase_count >= 1 && lowercase_count >= 1 && special_count >= 1 && digit_count >= 1));
+
+    save_password(password);
+    return password;
+}
+
 
 void save_password(char* password) {
     FILE*  fptr;
