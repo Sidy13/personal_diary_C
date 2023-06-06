@@ -23,6 +23,7 @@ typedef struct {
 void ajout(AGENDA *);
 int len_password();
 char* password();
+void addrecord();
 
 
 #endif //C_SHELL_FONCTIONS_H

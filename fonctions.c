@@ -69,24 +69,25 @@ char* password() {
     }while(special_count==0 ||number_count == 0 || uppercase_count == 0);
     return password;
 }
-//
-//int create_password() {
-//    int password;
-//    int verification = 1;
-//    int length = len_password();
-//    printf("Entrez votre mot de passe :\n");
-//    scanf("%d", password);
-//    for (int i = 0; i < length; i++) {
-//        while (verification==1)
-//            if ((password[i]<0)||(password[i]>9)){
-//                printf("Votre mot de passe ne doit contenir que des chiffres\n");
-//                printf("Entrez votre mot de passe :\n");
-//                scanf("%d", password);
-//            }
-//            else
-//                verification = 0;
-//    }
-//    return password;
-//}
 
-//Test Alex
+void addrecord()
+{
+    //initialise un tableau de char qui va nous servir de texte
+    char phrase[1000];
+
+    //ouverture du fichier + ecriture
+    FILE* fichier = fopen("record.txt", "a");
+
+    //saisie du texte qu'on veut ajouter
+    printf("Veuillez saisir une phrase : ");
+    fgets(phrase, sizeof(phrase), stdin);
+
+    //ajout de la date
+
+
+    //ajout du texte dans le fichier
+    fprintf(fichier, "%s", phrase);
+
+    //fermeture du fichier
+    fclose(fichier);
+}
