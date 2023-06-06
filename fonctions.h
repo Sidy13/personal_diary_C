@@ -1,0 +1,8 @@
+//
+// Created by Sidy on 06/06/2023.
+//
+
+#ifndef PERSONAL_DIARY_C_FONCTIONS_H
+#define PERSONAL_DIARY_C_FONCTIONS_H
+
+#endif //PERSONAL_DIARY_C_FONCTIONS_H
