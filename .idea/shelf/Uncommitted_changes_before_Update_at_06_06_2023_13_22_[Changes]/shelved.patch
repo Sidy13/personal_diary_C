@@ -1,0 +1,189 @@
+Index: fonctions.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//\n// Created by Sidy on 06/06/2023.\n//\n\n#ifndef PERSONAL_DIARY_C_FONCTIONS_H\n#define PERSONAL_DIARY_C_FONCTIONS_H\n\n#endif //PERSONAL_DIARY_C_FONCTIONS_H\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/fonctions.h b/fonctions.h
+--- a/fonctions.h	(revision 7448c538e9f2b47bbad21df3875901f27794ba8f)
++++ b/fonctions.h	(date 1686050348440)
+@@ -1,8 +1,29 @@
+ //
+-// Created by Sidy on 06/06/2023.
++// Created by Sidy on 04/06/2023.
+ //
+ 
+-#ifndef PERSONAL_DIARY_C_FONCTIONS_H
+-#define PERSONAL_DIARY_C_FONCTIONS_H
++#ifndef C_SHELL_FONCTIONS_H
++#define C_SHELL_FONCTIONS_H
++#define Date_max 365
++#include <stdio.h>
++
+ 
+-#endif //PERSONAL_DIARY_C_FONCTIONS_H
++typedef struct {
++    int jour;
++    int mois;
++    int annee;
++    char description[100];
++} DATE;
++
++typedef struct {
++    DATE evenement[Date_max];
++    int count;
++} AGENDA;
++
++void ajout(AGENDA *);
++int len_password();
++char* create_password();
++void create_file();
++
++
++#endif //C_SHELL_FONCTIONS_H
+\ No newline at end of file
+Index: fonctions.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//\n// Created by Sidy on 06/06/2023.\n//\n\n#include \"fonctions.h\"\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/fonctions.c b/fonctions.c
+--- a/fonctions.c	(revision 7448c538e9f2b47bbad21df3875901f27794ba8f)
++++ b/fonctions.c	(date 1686050533137)
+@@ -1,5 +1,89 @@
+ //
+-// Created by Sidy on 06/06/2023.
++// Created by Sidy on 04/06/2023.
+ //
+ 
+ #include "fonctions.h"
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++
++void ajout(AGENDA* agenda){
++    DATE event;
++    if (agenda->count >= Date_max){
++        printf("L'évenement ne peut pas être ajouté dans l'agenda");
++        return;
++    }
++    else{
++        printf("Entrez la date de l'évenement sous la forme jour mois année :");
++        scanf("%d %d %d", &event.jour, &event.mois, &event.annee);
++        printf("\nDécrivez l'évenement\n");
++        getchar();
++        fgets(event.description, sizeof(event.description), stdin);
++        agenda->evenement[agenda->count++] = event;
++        printf("\nL'évenement a été ajouté dans l'agenda\n");
++    }
++}
++
++int len_password() {
++    int length = 0;
++    printf("Voulez-vous un mot de passe à 4 chiffres, 6 chiffres ou 12 chiffres ?\n");
++    do {
++        printf("Ecrivez soit '4' soit '6' soit '12' :\n");
++        scanf("%d", &length);
++        if (length != 4 && length != 6 && length != 12) {
++            printf("Longueur de mot de passe invalide. Veuillez réessayer.\n");
++        }
++    } while (length != 4 && length != 6 && length != 12);
++    return length;
++}
++
++
++char* create_password() {
++    char *password = (char *) malloc(sizeof(char)*40);
++    int special_count = 0;
++    int number_count = 0;
++    int uppercase_count = 0;
++    int password_len = 0;
++
++
++    do{
++        printf("Entrez votre mot de passe :\n");
++        printf("Votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre");
++        fgets(password, sizeof(password), stdin);
++        password_len = strlen(password);
++        for (int i = 0;i<password_len;i++) {
++            if (password[i] > 47 && password[i] < 58) {
++                number_count++;
++            } else {
++                if (!((password[i] > 64 && password[i] < 91) || (password[i] > 96 && password[i] < 123))) {
++                    special_count++;
++                } else if (password[i] > 64 && password[i] < 91) {
++                    uppercase_count++;
++                }
++            }
++            printf("%c", password[i]);
++        }
++
++
++
++    }while(special_count==0 ||number_count == 0 || uppercase_count == 0);
++    return password;
++}
++
++void create_file(char* password){
++    char* pass = create_password();
++    char data[1000];
++    FILE*  fptr;
++    fptr = fopen("password.txt","w");
++
++    if(fptr == NULL){
++        printf("Unable to create file\n");
++    }
++    printf("Enter contents to store in file : \n");
++    fgets(data,1000,stdin);
++
++    fputs(data,fptr);
++    fclose(fptr);
++
++    printf("file created and saved succesfully");
++}
+\ No newline at end of file
+Index: main.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//\n// Created by Sidy on 06/06/2023.\n//\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.c b/main.c
+--- a/main.c	(revision 7448c538e9f2b47bbad21df3875901f27794ba8f)
++++ b/main.c	(date 1686050259867)
+@@ -1,3 +1,30 @@
+ //
+-// Created by Sidy on 06/06/2023.
++// Created by Sidy on 03/06/2023.
+ //
++#include <stdio.h>
++#include "fonctions.h"
++
++int main() {
++    char* pass = create_password();
++    char data[1000];
++
++
++    //printf("%s", pass);
++    FILE*  fptr;
++    fptr = fopen("password.txt","w");
++
++    if(fptr == NULL){
++        printf("Unable to create file\n");
++        return 1;
++    }
++    printf("Enter contents to store in file : \n");
++    fgets(data,1000,stdin);
++
++    fputs(data,fptr);
++    fclose(fptr);
++
++    printf("file created and saved succesfully");
++
++    return 0;
++
++}
