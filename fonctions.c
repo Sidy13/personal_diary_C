@@ -95,6 +95,7 @@ int password_verif(char* password){
 }
 
 
+
 void addrecord()
 {
     //initialise un tableau de char qui va nous servir de texte
