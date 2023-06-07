@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "time.h"
+/*
 void ajout(AGENDA* agenda){
     DATE event;
     if (agenda->count >= Date_max){
@@ -67,7 +68,7 @@ int len_password() {
 
     save_password(password);
     return password;
-}*/
+}
 
 
 int special_character(char c) {
@@ -169,7 +170,7 @@ void stop_password(char* password) {
 void enter_diary(){
 
 }
-
+ */
 void addrecord()
 {
     //partie où ya la date :
@@ -194,7 +195,7 @@ void addrecord()
     char phrase[1000];
 
     //ouverture du fichier + ecriture
-    FILE* fichier = fopen("record.txt", "a");
+    FILE* fichier = fopen("../data/record.txt", "a");
 
     //saisie du texte qu'on veut ajouter
     printf("Veuillez saisir une phrase : ");
