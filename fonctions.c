@@ -38,45 +38,144 @@ int len_password() {
 }
 
 
-char* password() {
-    char *password = (char *) malloc(sizeof(char)*40);
+/*char* create_password() {
+    char *password = (char *) malloc(sizeof(char) * 40);
     int special_count = 0;
     int number_count = 0;
     int uppercase_count = 0;
     int password_len = 0;
 
-
-    do{
-        printf("Entrez votre mot de passe :\n");
-        printf("Votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre");
-        fgets(password, sizeof(password), stdin);
+    do {
+        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre): \n");
+        fgets(password, 40, stdin);
         password_len = strlen(password);
-        for (int i = 0;i<password_len;i++) {
-            if (password[i] > 47 && password[i] < 58) {
+
+        for (int i = 0; i < password_len; i++) {
+            if (password[i] >= '0' && password[i] <= '9') {
                 number_count++;
-            } else {
-                if (!((password[i] > 64 && password[i] < 91) || (password[i] > 96 && password[i] < 123))) {
-                    special_count++;
-                } else if (password[i] > 64 && password[i] < 91) {
-                    uppercase_count++;
-                }
+            } else if ((password[i] >= '!' && password[i] <= '/') || (password[i] >= ':' && password[i] <= '@') || (password[i] >= '[' && password[i] <= '`') || (password[i] >= '{' && password[i] <= '~')) {
+                special_count++;
+            } else if (password[i] >= 'A' && password[i] <= 'Z') {
+                uppercase_count++;
+            }
+            else if (password[i] >= 'a' && password[i] <= 'z') {
+                uppercase_count++;
             }
             printf("%c", password[i]);
         }
+    } while (special_count == 0 || number_count == 0 || uppercase_count == 0);
+
+    save_password(password);
+    return password;
+}*/
 
 
+int special_character(char c) {
+    char special_characters[] = "!@#$%^&*()_+-={}[]|\\:;\"'<>,.?/";
 
-    }while(special_count==0 ||number_count == 0 || uppercase_count == 0);
+    for (int i = 0; i < strlen(special_characters); i++) {
+        if (c == special_characters[i]) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+char* create_password() {
+    char* password = (char*) malloc(sizeof(char) * 40);
+    int uppercase_count = 0;
+    int lowercase_count = 0;
+    int special_count = 0;
+    int digit_count = 0;
+
+    do {
+        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins une majuscule, une minuscule, un caractere special et un chiffre): \n");
+        fgets(password, 40, stdin);
+
+        for (int i = 0; password[i] != '\0'; i++) {
+            if (password[i] >= 'A' && password[i] <= 'Z')
+                uppercase_count++;
+            else if (password[i] >= 'a' && password[i] <= 'z')
+                lowercase_count++;
+            else if (password[i] >= '0' && password[i] <= '9')
+                digit_count++;
+            else if (special_character(password[i]))
+                special_count++;
+        }
+
+        if (!(uppercase_count >= 1 && lowercase_count >= 1 && special_count >= 1 && digit_count >= 1)) {
+            printf("Le mot de passe ne satisfait pas les conditions. Veuillez réessayer.\n");
+            uppercase_count = 0;
+            lowercase_count = 0;
+            special_count = 0;
+            digit_count = 0;
+        }
+    } while (!(uppercase_count >= 1 && lowercase_count >= 1 && special_count >= 1 && digit_count >= 1));
+
+    save_password(password);
     return password;
 }
 
+
+void save_password(char* password) {
+    FILE*  fptr;
+    fptr = fopen("../data/password.txt", "w");
+
+    if (fptr == NULL) {
+        printf("Impossible d'enregistrer le mot de passe\n");
+    } else {
+        fputs(password, fptr);
+        fclose(fptr);
+        printf("Mot de passe enregistré !\n");
+    }
+}
+
+
+int password_verif(char* password){
+    char verif[100];
+    printf("\nEntrez votre mot de passe :");
+    scanf("%s", verif);
+    if (strcmp(password, verif) != 0){
+        printf("Mot de passe erroné");
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+
+
+
+
+void stop_password(char* password) {
+    int count = 0; // Initialisez count à 0
+
+    do {
+        if (password_verif(password) == 0) {
+            count++;
+        } else {
+            enter_diary();
+        }
+
+        if (count == 3) {
+            return; // Arrêtez la fonction après trois mots de passe erronés
+        }
+
+    } while (1); // Utilisez 1 comme condition pour une boucle infinie
+}
+
+
+void enter_diary(){
+
+}
 void addrecord()
 {
     //initialise un tableau de char qui va nous servir de texte
     char phrase[1000];
 
     //ouverture du fichier + ecriture
-    FILE* fichier = fopen("record.txt", "a");
+    FILE* fichier = fopen("../data/record.txt", "a");
 
     //saisie du texte qu'on veut ajouter
     printf("Veuillez saisir une phrase : ");
