@@ -1,8 +1,0 @@
-# ninja log v5
-78	141	1686080466097933202	personal_diary_C	7dfba27b2a651d61
-4	87	7078366817100726	CMakeFiles/personal_diary_C.dir/main.c.obj	b6cd716af3f43b69
-1	89	7078366817100726	CMakeFiles/personal_diary_C.dir/fonctions.c.obj	83567cfa39c111bc
-6	65	7078368960511404	CMakeFiles/personal_diary_C.dir/main.c.obj	b6cd716af3f43b69
-2	88	7078368960738836	CMakeFiles/personal_diary_C.dir/fonctions.c.obj	83567cfa39c111bc
-88	168	7078368961492815	personal_diary_C.exe	c852afb93b4249dc
-2	78	7078370404008597	CMakeFiles/personal_diary_C.dir/main.c.obj	b6cd716af3f43b69
