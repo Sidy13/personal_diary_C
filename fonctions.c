@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "time.h"
-
 void ajout(AGENDA* agenda){
     DATE event;
     if (agenda->count >= Date_max){
@@ -38,6 +37,37 @@ int len_password() {
     return length;
 }
 
+
+/*char* create_password() {
+    char *password = (char *) malloc(sizeof(char) * 40);
+    int special_count = 0;
+    int number_count = 0;
+    int uppercase_count = 0;
+    int password_len = 0;
+
+    do {
+        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre): \n");
+        fgets(password, 40, stdin);
+        password_len = strlen(password);
+
+        for (int i = 0; i < password_len; i++) {
+            if (password[i] >= '0' && password[i] <= '9') {
+                number_count++;
+            } else if ((password[i] >= '!' && password[i] <= '/') || (password[i] >= ':' && password[i] <= '@') || (password[i] >= '[' && password[i] <= '`') || (password[i] >= '{' && password[i] <= '~')) {
+                special_count++;
+            } else if (password[i] >= 'A' && password[i] <= 'Z') {
+                uppercase_count++;
+            }
+            else if (password[i] >= 'a' && password[i] <= 'z') {
+                uppercase_count++;
+            }
+            printf("%c", password[i]);
+        }
+    } while (special_count == 0 || number_count == 0 || uppercase_count == 0);
+
+    save_password(password);
+    return password;
+}*/
 
 
 int special_character(char c) {
@@ -102,52 +132,30 @@ void save_password(char* password) {
 }
 
 
-
-
-int password_verif() {
+int password_verif(char* password){
     char verif[100];
-    char password[100];
-
-    FILE* fptr = fopen("../data/password.txt", "r");
-    if (fptr == NULL) {
-        printf("Impossible d'ouvrir le fichier de mot de passe.\n");
+    printf("\nEntrez votre mot de passe :");
+    scanf("%s", verif);
+    if (strcmp(password, verif) != 0){
+        printf("Mot de passe erroné");
         return 0;
     }
-
-    if (fgets(verif, sizeof(verif), fptr) == NULL) {
-        printf("Erreur lors de la lecture du mot de passe dans le fichier.\n");
-        fclose(fptr);
-        return 0;
-    }
-
-    fclose(fptr);
-
-    // Supprimer les caractères de nouvelle ligne du mot de passe stocké
-    verif[strcspn(verif, "\n")] = '\0';
-
-    printf("Entrez votre mot de passe : ");
-    fgets(password, sizeof(password), stdin);
-    password[strcspn(password, "\n")] = '\0';
-
-    if (strcmp(password, verif) == 0) {
-        printf("Mot de passe correct.\n");
-        return 0;
-    } else {
-        printf("Mot de passe incorrect\n");
+    else {
         return 1;
     }
 }
 
 
 
-void stop_password() {
+
+void stop_password(char* password) {
     int count = 0; // Initialisez count à 0
 
     do {
-        if (password_verif() == 1) {
+        if (password_verif(password) == 0) {
             count++;
         } else {
-            break;
+            enter_diary();
         }
 
         if (count == 3) {
@@ -155,7 +163,6 @@ void stop_password() {
         }
 
     } while (1); // Utilisez 1 comme condition pour une boucle infinie
-    enter_diary();
 }
 
 
@@ -187,7 +194,7 @@ void addrecord()
     char phrase[1000];
 
     //ouverture du fichier + ecriture
-    FILE* fichier = fopen("../data/record.txt", "a");
+    FILE* fichier = fopen("record.txt", "a");
 
     //saisie du texte qu'on veut ajouter
     printf("Veuillez saisir une phrase : ");
@@ -201,15 +208,4 @@ void addrecord()
 
     //fermeture du fichier
     fclose(fichier);
-}
-
-void editpassword()
-{
-    char* password;
-    char* create_newpassword = create_password();
-    int newpassword_verif = password_verif();
-    create_newpassword;
-
-    save_password(create_newpassword);
-    newpassword_verif;
 }

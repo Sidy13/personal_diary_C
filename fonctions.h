@@ -22,14 +22,8 @@ typedef struct {
 
 void ajout(AGENDA *);
 int len_password();
-int special_character(char c);
-char* create_password();
-void save_password(char* password);
-int password_verif();
-void stop_password();
-void enter_diary();
+char* password();
 void addrecord();
-void editpassword();
 
 
 #endif //C_SHELL_FONCTIONS_H

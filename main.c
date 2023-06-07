@@ -1,9 +1,8 @@
 
 #include <stdio.h>
-#include "fonctions.h"
+#include "fonctions.c"
 
 int main() {
-    char * test = create_password();
+    addrecord();
     return 0;
 }
-
