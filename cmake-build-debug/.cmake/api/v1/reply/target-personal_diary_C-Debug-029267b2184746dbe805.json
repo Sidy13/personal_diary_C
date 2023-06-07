@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "personal_diary_C"
+			"path" : "personal_diary_C.exe"
+		},
+		{
+			"path" : "personal_diary_C.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -42,7 +45,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics"
+					"fragment" : "-g -fdiagnostics-color=always"
 				},
 				{
 					"fragment" : "-std=gnu11"
@@ -52,7 +55,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/Users/Sidy/CLionProjects/personal_diary_C/."
+					"path" : "C:/Users/LIN/CLionProjects/personal_diary_C/."
 				}
 			],
 			"language" : "C",
@@ -83,12 +86,16 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "C"
 	},
 	"name" : "personal_diary_C",
-	"nameOnDisk" : "personal_diary_C",
+	"nameOnDisk" : "personal_diary_C.exe",
 	"paths" : 
 	{
 		"build" : ".",

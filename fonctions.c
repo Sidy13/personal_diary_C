@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "time.h"
 void ajout(AGENDA* agenda){
     DATE event;
     if (agenda->count >= Date_max){
@@ -169,24 +169,42 @@ void stop_password(char* password) {
 void enter_diary(){
 
 }
+
 void addrecord()
 {
+    //partie où ya la date :
+
+    //le temps écoulé depuis le 1er janvier 1970 (no troll)
+    time_t temps;
+    //La structure tm contient les informations de date et d'heure
+    struct tm* date;
+
+    //le temps actuel en secondes depuis l'époque (1er janvier 1970)
+    temps = time(NULL);
+    //convertir le temps stocké dans "temps" en une structure "tm" pour avoir je crois la date avec les jours, mois, année
+    date = localtime(&temps);
+
+    int jour = date->tm_mday;
+    int mois = date->tm_mon + 1;
+    int annee = date->tm_year + 1900;
+
+    //partie ou ya l'agenda :
+
     //initialise un tableau de char qui va nous servir de texte
     char phrase[1000];
 
     //ouverture du fichier + ecriture
-    FILE* fichier = fopen("../data/record.txt", "a");
+    FILE* fichier = fopen("record.txt", "a");
 
     //saisie du texte qu'on veut ajouter
     printf("Veuillez saisir une phrase : ");
     fgets(phrase, sizeof(phrase), stdin);
 
-    //ajout de la date
-
-
+    //ajout de la date dans le fichier
+    fprintf(fichier, "Date : %02d/%02d/%04d --> ", jour, mois, annee);
 
     //ajout du texte dans le fichier
-    fprintf(fichier, "%s", phrase);
+    fprintf(fichier, "%s\n", phrase);
 
     //fermeture du fichier
     fclose(fichier);
