@@ -133,7 +133,7 @@ int password_verif() {
         printf("Mot de passe correct.\n");
         return 0;
     } else {
-        printf("Mot de passe incorrect");
+        printf("Mot de passe incorrect\n");
         return 1;
     }
 }
