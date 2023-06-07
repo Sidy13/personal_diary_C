@@ -102,30 +102,52 @@ void save_password(char* password) {
 }
 
 
-int password_verif(char* password){
+
+
+int password_verif() {
     char verif[100];
-    printf("\nEntrez votre mot de passe :");
-    scanf("%s", verif);
-    if (strcmp(password, verif) != 0){
-        printf("Mot de passe erroné");
+    char password[100];
+
+    FILE* fptr = fopen("../data/password.txt", "r");
+    if (fptr == NULL) {
+        printf("Impossible d'ouvrir le fichier de mot de passe.\n");
         return 0;
     }
-    else {
+
+    if (fgets(verif, sizeof(verif), fptr) == NULL) {
+        printf("Erreur lors de la lecture du mot de passe dans le fichier.\n");
+        fclose(fptr);
+        return 0;
+    }
+
+    fclose(fptr);
+
+    // Supprimer les caractères de nouvelle ligne du mot de passe stocké
+    verif[strcspn(verif, "\n")] = '\0';
+
+    printf("Entrez votre mot de passe : ");
+    fgets(password, sizeof(password), stdin);
+    password[strcspn(password, "\n")] = '\0';
+
+    if (strcmp(password, verif) == 0) {
+        printf("Mot de passe correct.\n");
+        return 0;
+    } else {
+        printf("Mot de passe incorrect");
         return 1;
     }
 }
 
 
 
-
-void stop_password(char* password) {
+void stop_password() {
     int count = 0; // Initialisez count à 0
 
     do {
-        if (password_verif(password) == 0) {
+        if (password_verif() == 1) {
             count++;
         } else {
-            enter_diary();
+            break;
         }
 
         if (count == 3) {
@@ -133,6 +155,7 @@ void stop_password(char* password) {
         }
 
     } while (1); // Utilisez 1 comme condition pour une boucle infinie
+    enter_diary();
 }
 
 
