@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "time.h"
-/*
+
 void ajout(AGENDA* agenda){
     DATE event;
     if (agenda->count >= Date_max){
@@ -38,37 +38,6 @@ int len_password() {
     return length;
 }
 
-
-/*char* create_password() {
-    char *password = (char *) malloc(sizeof(char) * 40);
-    int special_count = 0;
-    int number_count = 0;
-    int uppercase_count = 0;
-    int password_len = 0;
-
-    do {
-        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre): \n");
-        fgets(password, 40, stdin);
-        password_len = strlen(password);
-
-        for (int i = 0; i < password_len; i++) {
-            if (password[i] >= '0' && password[i] <= '9') {
-                number_count++;
-            } else if ((password[i] >= '!' && password[i] <= '/') || (password[i] >= ':' && password[i] <= '@') || (password[i] >= '[' && password[i] <= '`') || (password[i] >= '{' && password[i] <= '~')) {
-                special_count++;
-            } else if (password[i] >= 'A' && password[i] <= 'Z') {
-                uppercase_count++;
-            }
-            else if (password[i] >= 'a' && password[i] <= 'z') {
-                uppercase_count++;
-            }
-            printf("%c", password[i]);
-        }
-    } while (special_count == 0 || number_count == 0 || uppercase_count == 0);
-
-    save_password(password);
-    return password;
-}
 
 
 int special_character(char c) {
@@ -170,7 +139,7 @@ void stop_password(char* password) {
 void enter_diary(){
 
 }
- */
+
 void addrecord()
 {
     //partie où ya la date :

@@ -3,6 +3,6 @@
 #include "fonctions.h"
 
 int main() {
-    addrecord();
+    char * test = create_password();
     return 0;
 }
