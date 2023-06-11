@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.24"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "personal_diary_C::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-personal_diary_C-Debug-40cb42eb0a83a568d566.json",
+					"jsonFile" : "target-personal_diary_C-Debug-cdb8e07390bc53b2becf.json",
 					"name" : "personal_diary_C",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/Sidy/CLionProjects/personal_diary_C/cmake-build-debug",
-		"source" : "/Users/Sidy/CLionProjects/personal_diary_C"
+		"build" : "C:/Users/benoi/CLionProjects/personal_diary_C/cmake-build-debug",
+		"source" : "C:/Users/benoi/CLionProjects/personal_diary_C"
 	},
 	"version" : 
 	{
