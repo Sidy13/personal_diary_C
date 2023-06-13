@@ -29,6 +29,7 @@ int password_verif();
 void stop_password();
 void enter_diary();
 void addrecord();
+void editpassword();
 
 
 #endif //C_SHELL_FONCTIONS_H

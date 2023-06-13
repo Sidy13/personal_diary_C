@@ -202,3 +202,14 @@ void addrecord()
     //fermeture du fichier
     fclose(fichier);
 }
+
+void editpassword()
+{
+    char* password;
+    char* create_newpassword = create_password();
+    int newpassword_verif = password_verif();
+    create_newpassword;
+
+    save_password(create_newpassword);
+    newpassword_verif;
+}
