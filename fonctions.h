@@ -25,5 +25,6 @@ int len_password();
 char* create_password();
 void addrecord();
 int password_verif();
-
+void viewRecord();
+void enter_diary(int choice);
 #endif //C_SHELL_FONCTIONS_H
