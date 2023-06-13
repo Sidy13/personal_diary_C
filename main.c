@@ -6,3 +6,4 @@ int main() {
     char * test = create_password();
     return 0;
 }
+

@@ -20,10 +20,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f83ad8c-2026-40bb-81a5-c1ab873658ad" name="Changes" comment="finalisation du addrecord() avec la date (benoit)">
+    <list default="true" id="9f83ad8c-2026-40bb-81a5-c1ab873658ad" name="Changes" comment="Driss">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonctions.c" beforeDir="false" afterPath="$PROJECT_DIR$/fonctions.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +75,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="personal_diary_C" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="personal_diary_C" TARGET_NAME="personal_diary_C" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="personal_diary_C" RUN_TARGET_NAME="personal_diary_C">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -96,6 +92,8 @@
       <workItem from="1686047972656" duration="569000" />
       <workItem from="1686048546401" duration="5554000" />
       <workItem from="1686136851745" duration="235000" />
+      <workItem from="1686672148796" duration="168000" />
+      <workItem from="1686674938676" duration="1504000" />
     </task>
     <task id="LOCAL-00001" summary="Création des fichiers">
       <created>1686048013296</created>

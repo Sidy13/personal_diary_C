@@ -1,3 +1,0 @@
-C:/Users/benoi/CLionProjects/personal_diary_C/cmake-build-debug/CMakeFiles/personal_diary_C.dir
-C:/Users/benoi/CLionProjects/personal_diary_C/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/benoi/CLionProjects/personal_diary_C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
