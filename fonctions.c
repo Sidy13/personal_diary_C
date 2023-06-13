@@ -172,20 +172,56 @@ int password_verif() {
 }
 
 
-void enter_diary(){
+void enter_diary(int choice){
+
+    switch (choice) {
+        case 1:
+            addrecord();
+            break;
+        case 2:
+//            printRecord();
+            break;
+        case 3:
+//            editRecord();
+            break;
+        case 4:
+//            deleterecord();
+            break;
+        case 5:
+//            editPassword();
+            break;
+        case 6:
+            exit(0);
+
+    }
+}
+
+void viewRecord(){
+    FILE *fptr;
+    char c;
+    fptr = fopen("../data/record.txt", "r");
+    if (fptr == NULL)
+    {
+        printf("Cannot open file \n");
+        exit(0);
+    }
+    while((c=fgetc(fptr)) != EOF){
+        putchar(c);
+    }
+    fclose(fptr);
+
 
 }
 
 
-
-void stop_password() {
+void stop_password(int choice) {
     int count = 0; // Initialisez count à 0
 
     do {
         if (password_verif() == 0) {
             count++;
         } else {
-            enter_diary();
+            enter_diary(choice);
         }
 
         if (count == 3) {

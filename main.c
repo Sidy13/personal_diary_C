@@ -4,8 +4,7 @@
 
 
 int main() {
-    char* test = create_password();
-    int reponse = password_verif();
+    viewRecord();
 
     return 0;
 

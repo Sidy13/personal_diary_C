@@ -20,10 +20,13 @@ typedef struct {
     int count;
 } AGENDA;
 
+
 void ajout(AGENDA *);
 int len_password();
 char* create_password();
 void addrecord();
 int password_verif();
-
+void enter_diary(int choice);
+void viewRecord();
+void stop_password(int choice);
 #endif //C_SHELL_FONCTIONS_H
