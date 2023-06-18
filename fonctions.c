@@ -8,68 +8,36 @@
 #include <string.h>
 #include "time.h"
 
+void ajout(AGENDA* agenda){
+    DATE event;
+    if (agenda->count >= Date_max){
+        printf("L'évenement ne peut pas être ajouté dans l'agenda");
+        return;
+    }
+    else{
+        printf("Entrez la date de l'évenement sous la forme jour mois année :");
+        scanf("%d %d %d", &event.jour, &event.mois, &event.annee);
+        printf("\nDécrivez l'évenement\n");
+        getchar();
+        fgets(event.description, sizeof(event.description), stdin);
+        agenda->evenement[agenda->count++] = event;
+        printf("\nL'évenement a été ajouté dans l'agenda\n");
+    }
+}
 
-//void ajout(AGENDA* agenda){
-//    DATE event;
-//    if (agenda->count >= Date_max){
-//        printf("L'évenement ne peut pas être ajouté dans l'agenda");
-//        return;
-//    }
-//    else{
-//        printf("Entrez la date de l'évenement sous la forme jour mois année :");
-//        scanf("%d %d %d", &event.jour, &event.mois, &event.annee);
-//        printf("\nDécrivez l'évenement\n");
-//        getchar();
-//        fgets(event.description, sizeof(event.description), stdin);
-//        agenda->evenement[agenda->count++] = event;
-//        printf("\nL'évenement a été ajouté dans l'agenda\n");
-//    }
-//}
-
-//int len_password() {
-//    int length = 0;
-//    printf("Voulez-vous un mot de passe à 4 chiffres, 6 chiffres ou 12 chiffres ?\n");
-//    do {
-//        printf("Ecrivez soit '4' soit '6' soit '12' :\n");
-//        scanf("%d", &length);
-//        if (length != 4 && length != 6 && length != 12) {
-//            printf("Longueur de mot de passe invalide. Veuillez réessayer.\n");
-//        }
-//    } while (length != 4 && length != 6 && length != 12);
-//    return length;
-//}
-
-
-/*char* create_password() {
-    char *password = (char *) malloc(sizeof(char) * 40);
-    int special_count = 0;
-    int number_count = 0;
-    int uppercase_count = 0;
-    int password_len = 0;
-
+int len_password() {
+    int length = 0;
+    printf("Voulez-vous un mot de passe à 4 chiffres, 6 chiffres ou 12 chiffres ?\n");
     do {
-        printf("Entrez votre mot de passe (votre mot de passe doit contenir au moins un caractere special, une lettre majuscule et un chiffre): \n");
-        fgets(password, 40, stdin);
-        password_len = strlen(password);
-
-        for (int i = 0; i < password_len; i++) {
-            if (password[i] >= '0' && password[i] <= '9') {
-                number_count++;
-            } else if ((password[i] >= '!' && password[i] <= '/') || (password[i] >= ':' && password[i] <= '@') || (password[i] >= '[' && password[i] <= '`') || (password[i] >= '{' && password[i] <= '~')) {
-                special_count++;
-            } else if (password[i] >= 'A' && password[i] <= 'Z') {
-                uppercase_count++;
-            }
-            else if (password[i] >= 'a' && password[i] <= 'z') {
-                uppercase_count++;
-            }
-            printf("%c", password[i]);
+        printf("Ecrivez soit '4' soit '6' soit '12' :\n");
+        scanf("%d", &length);
+        if (length != 4 && length != 6 && length != 12) {
+            printf("Longueur de mot de passe invalide. Veuillez réessayer.\n");
         }
-    } while (special_count == 0 || number_count == 0 || uppercase_count == 0);
+    } while (length != 4 && length != 6 && length != 12);
+    return length;
+}
 
-    save_password(password);
-    return password;
-}*/
 
 
 int special_character(char c) {
@@ -83,20 +51,6 @@ int special_character(char c) {
 
     return 0;
 }
-
-void save_password(char* password) {
-    FILE*  fptr;
-    fptr = fopen("../data/password.txt", "w");
-
-    if (fptr == NULL) {
-        printf("Impossible d'enregistrer le mot de passe\n");
-    } else {
-        fputs(password, fptr);
-        fclose(fptr);
-        printf("Mot de passe enregistre !\n");
-    }
-}
-
 
 char* create_password() {
     char* password = (char*) malloc(sizeof(char) * 40);
@@ -134,6 +88,19 @@ char* create_password() {
 }
 
 
+void save_password(char* password) {
+    FILE*  fptr;
+    fptr = fopen("../data/password.txt", "w");
+
+    if (fptr == NULL) {
+        printf("Impossible d'enregistrer le mot de passe\n");
+    } else {
+        fputs(password, fptr);
+        fclose(fptr);
+        printf("Mot de passe enregistré !\n");
+    }
+}
+
 
 
 
@@ -166,9 +133,30 @@ int password_verif() {
         printf("Mot de passe correct.\n");
         return 0;
     } else {
-        printf("Mot de passe incorrect");
+        printf("Mot de passe incorrect\n");
         return 1;
     }
+}
+
+
+
+void stop_password() {
+    int count = 0; // Initialisez count à 0
+    int choice = 0;
+
+    do {
+        if (password_verif() == 1) {
+            count++;
+        } else {
+            break;
+        }
+
+        if (count == 3) {
+            return; // Arrêtez la fonction après trois mots de passe erronés
+        }
+
+    } while (1); // Utilisez 1 comme condition pour une boucle infinie
+    enter_diary(choice);
 }
 
 
@@ -213,25 +201,6 @@ void viewRecord(){
 
 }
 
-
-void stop_password() {
-    int count = 0; // Initialisez count à 0
-
-    do {
-        if (password_verif() == 0) {
-            count++;
-        } else {
-            enter_diary();
-        }
-
-        if (count == 3) {
-            return; // Arrêtez la fonction après trois mots de passe erronés
-        }
-
-    } while (1); // Utilisez 1 comme condition pour une boucle infinie
-}
-
-
 void addrecord()
 {
     //partie où ya la date :
@@ -263,11 +232,196 @@ void addrecord()
     fgets(phrase, sizeof(phrase), stdin);
 
     //ajout de la date dans le fichier
-    fprintf(fichier, "Date : %02d/%02d/%04d --> ", jour, mois, annee);
+    fprintf(fichier, "%02d/%02d/%04d : ", jour, mois, annee);
 
     //ajout du texte dans le fichier
     fprintf(fichier, "%s\n", phrase);
 
     //fermeture du fichier
     fclose(fichier);
+}
+
+
+/*void editrecord(){
+    int j, m, a;
+    int jour, mois, annee;
+    char phrase[1000];
+    FILE * fic;
+    FILE * fp = fopen("../data/record.txt", "rt");
+    if ( fp == NULL){
+        printf("Ouverture impossible !!!!");
+        exit(1);
+    }
+    fic = fopen("temp.txt", "wt");
+    if ( fic == NULL){
+        printf("Ouverture impossible !!!!");
+        exit(1);
+    }
+    printf("Quelle date voulez-vous modifier : \n");
+    printf("VEUILLEZ SAISIR LA DATE SOUS LA FORME J/M/A \n");
+    scanf("%d/%d/%d", &j, &m, &a);
+
+
+
+
+}*/
+
+/*void deleterecord() {
+    int jour, mois, annee;
+    int j, m, a;
+    char phrase[1000];
+    FILE * pf;
+    FILE * fic;
+    pf = fopen("../data/record.txt", "r");
+    if (pf == NULL) {
+        printf("ERREUR");
+        exit(1);
+    } else {
+        fic = fopen("temp.txt", "w");
+    }
+    if (fic == NULL) {
+        printf("ERREUR");
+        exit(1);
+    } else {
+        printf("Saisir la date sous la forme J/M/A : \n");
+        scanf("%d/%d/%d", &j, &m, &a);
+        while (fscanf(pf, "%d/%d/%d\n%s", &jour, &mois, &annee, phrase) != EOF) {
+            if (!(jour == j && mois == m && annee == a)) {
+                fprintf(fic, "%d/%d/%d\n%s\n", jour, mois, annee, phrase);
+            }
+        }
+        fclose(pf);
+        fclose(fic);
+    }
+
+    remove("../data/record.txt");
+    rename("temp.txt", "../data/record.txt");
+
+    printf("Le texte avec la date saisie a été supprimé.\n");
+}*/
+
+
+void deleterecord() {
+    // Saisie de la date à partir de laquelle supprimer les enregistrements
+    int jour, mois, annee;
+    printf("Entrez la date à partir de laquelle supprimer les enregistrements (jour mois annee) : ");
+    scanf("%d %d %d", &jour, &mois, &annee);
+
+    // Conversion de la date en format de chaîne de caractères
+    char dateRecherchee[12];
+    sprintf(dateRecherchee, "%02d/%02d/%04d", jour, mois, annee);
+
+    // Ouverture du fichier en mode lecture
+    FILE* fichier = fopen("../data/record.txt", "r");
+    if (fichier == NULL) {
+        printf("Impossible d'ouvrir le fichier des enregistrements.\n");
+        return;
+    }
+
+    // Création d'un fichier temporaire pour stocker les enregistrements à conserver
+    FILE* fichierTemp = fopen("../data/record_temp.txt", "w");
+    if (fichierTemp == NULL) {
+        printf("Impossible de créer le fichier temporaire.\n");
+        fclose(fichier);
+        return;
+    }
+
+    char ligne[1000];
+    char dateEnregistrement[12];
+    int supprimer = 0;  // Indicateur pour supprimer les enregistrements
+
+    // Lecture du fichier ligne par ligne
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        // Vérification de la ligne pour détecter la date
+        if (sscanf(ligne, "%11s", dateEnregistrement) == 1) {
+            // Si la date correspond à celle saisie par l'utilisateur, activer l'indicateur de suppression
+            if (strcmp(dateEnregistrement, dateRecherchee) == 0) {
+                supprimer = 1;
+            } else {
+                supprimer = 0;
+            }
+        }
+// Si l'indicateur de suppression est désactivé, écrire la ligne dans le fichier temporaire
+        if (!supprimer) {
+            fputs(ligne, fichierTemp);
+        }
+    }
+
+    // Fermeture des fichiers
+    fclose(fichier);
+    fclose(fichierTemp);
+
+    // Suppression du fichier original
+    remove("../data/record.txt");
+
+    // Renommage du fichier temporaire
+    rename("../data/record_temp.txt", "../data/record.txt");
+
+    printf("Les enregistrements à partir de la date %02d/%02d/%04d ont été supprimés.\n", jour, mois, annee);
+}
+
+
+void editrecord(){
+    int jour, mois, annee;
+    char phrase[100];
+    printf("VEUILLEZ SAISIR LA DATE SOUS LA FORME (jour mois annee) \n");
+    printf("Quelle date voulez-vous modifier ? \n");
+    scanf("%d %d %d", &jour, &mois, &annee);
+    printf("Quelle phrase voulez-vous mettre ? \n");
+    scanf("%s", phrase);
+
+    char dateRecherchee[12];
+    sprintf(dateRecherchee, "%02d/%02d/%04d", jour, mois, annee);
+
+    FILE* fichier = fopen("../data/record.txt", "r");
+    if (fichier == NULL) {
+        printf("Impossible d'ouvrir le fichier des enregistrements.\n");
+        return;
+    }
+
+    // Création d'un fichier temporaire pour stocker les enregistrements à conserver
+    FILE* fichierTemp = fopen("../data/record_temp.txt", "w");
+    if (fichierTemp == NULL) {
+        printf("Impossible de créer le fichier temporaire.\n");
+        fclose(fichier);
+        return;
+    }
+
+    char ligne[1000];
+    char dateEnregistrement[12];
+    int modifier = 0;
+
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL){
+        if (sscanf(ligne, "%11s", dateEnregistrement) == 1){
+            if (strcmp(dateRecherchee, dateEnregistrement) == 0){
+                modifier = 1;
+                fprintf(fichierTemp, "%s : %s \n", dateEnregistrement, phrase);
+            }
+            else{
+                modifier = 0;
+                fputs(ligne, fichierTemp);
+            }
+        }
+        else{
+            fputs(ligne, fichierTemp);
+        }
+
+    }
+
+    fclose(fichier);
+    fclose(fichierTemp);
+
+    remove("../data/record.txt");
+    rename("../data/record_temp.txt", "../data/record.txt");
+};
+
+void editpassword()
+{
+    char* password;
+    char* create_newpassword = create_password();
+    int newpassword_verif = password_verif();
+    create_newpassword;
+
+    save_password(create_newpassword);
+    newpassword_verif;
 }
