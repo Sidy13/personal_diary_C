@@ -219,20 +219,38 @@ void addrecord()
     int mois = date->tm_mon + 1;
     int annee = date->tm_year + 1900;
 
+    FILE* fichier = fopen("../data/record.txt", "r");
+    if (fichier == NULL)
+    {
+        printf("Cannot open file \n");
+        exit(0);
+    }
+    char str[20];
+    sprintf(str, "%02d/%02d/%04d", jour, mois, annee);
+    int present = 0;
+    char line[256];
     //partie ou ya l'agenda :
-
+    while (fgets(line, sizeof(line), fichier)) {
+        if (strstr(line, str) != NULL) {
+            fclose(fichier);
+            present = 1;
+        }
+    }
     //initialise un tableau de char qui va nous servir de texte
+
     char phrase[1000];
 
     //ouverture du fichier + ecriture
-    FILE* fichier = fopen("../data/record.txt", "a");
+    fichier = fopen("../data/record.txt", "a");
 
     //saisie du texte qu'on veut ajouter
     printf("Veuillez saisir une phrase : ");
     fgets(phrase, sizeof(phrase), stdin);
+    if (!present){
+        //ajout de la date dans le fichier
+        fprintf(fichier, "%02d/%02d/%04d : ", jour, mois, annee);{
 
-    //ajout de la date dans le fichier
-    fprintf(fichier, "%02d/%02d/%04d : ", jour, mois, annee);
+        }}
 
     //ajout du texte dans le fichier
     fprintf(fichier, "%s\n", phrase);
@@ -367,8 +385,9 @@ void editrecord(){
     printf("VEUILLEZ SAISIR LA DATE SOUS LA FORME (jour mois annee) \n");
     printf("Quelle date voulez-vous modifier ? \n");
     scanf("%d %d %d", &jour, &mois, &annee);
-    printf("Quelle phrase voulez-vous mettre ? \n");
-    scanf("%s", phrase);
+    printf("Entrer votre phrase");
+    getchar();  // Absorber le caractère de nouvelle ligne restant après la saisie précédente
+    fgets(phrase, sizeof(phrase), stdin);
 
     char dateRecherchee[12];
     sprintf(dateRecherchee, "%02d/%02d/%04d", jour, mois, annee);
@@ -424,4 +443,20 @@ void editpassword()
 
     save_password(create_newpassword);
     newpassword_verif;
+}
+
+DATE* enter_date(){
+    DATE *date;
+    printf("Saisissez le jour du record");
+    scanf("%d",date->jour);
+    printf("Saisissez le mois du record");
+    scanf("%d",date->mois);
+    printf("Saisissez l'anne du record");
+    scanf("%d",date->annee);
+    return date;
+}
+
+void searchrecord(){
+    DATE* date = enter_date();
+
 }

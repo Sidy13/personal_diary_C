@@ -32,5 +32,7 @@ void addrecord();
 void editpassword();
 void editrecord();
 void deleterecord();
+void searchrecord();
+DATE* enter_date();
 
 #endif //C_SHELL_FONCTIONS_H
